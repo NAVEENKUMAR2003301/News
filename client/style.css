@@ -1,0 +1,311 @@
+/* Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+@font-face {
+    font-family: 'Netflix Sans';
+    src: url('https://assets.nflxext.com/ffe/siteui/fonts/netflix-sans/v3/NetflixSans_W_Md.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+:root {
+    --netflix-red: #e50914;
+    --netflix-dark: #141414;
+    --netflix-light: #f3f3f3;
+    --netflix-gray: #808080;
+    --netflix-dark-gray: #2d2d2d;
+    --card-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    --transition-speed: 0.3s;
+}
+
+body {
+    background-color: var(--netflix-dark);
+    color: var(--netflix-light);
+    line-height: 1.6;
+}
+
+/* Header Styles */
+.header {
+    width: 100%;
+    height: 68px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 4%;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0) 100%);
+    transition: background-color var(--transition-speed);
+}
+
+.header.scrolled {
+    background-color: var(--netflix-dark);
+}
+
+.header > .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--netflix-red);
+    text-shadow: 0 0 20px rgba(229, 9, 20, 0.5);
+    letter-spacing: -1px;
+}
+
+.header > .search {
+    display: flex;
+    align-items: center;
+    width: 30%;
+    max-width: 400px;
+}
+
+.header > .search > input {
+    width: 100%;
+    height: 36px;
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--netflix-gray);
+    border-radius: 4px;
+    color: white;
+    transition: all var(--transition-speed);
+}
+
+.header > .search > input:focus {
+    outline: none;
+    border-color: white;
+    background-color: rgba(0, 0, 0, 0.9);
+}
+
+.header > .search > button {
+    width: 80px;
+    height: 36px;
+    margin-left: 10px;
+    background-color: var(--netflix-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all var(--transition-speed);
+}
+
+.header > .search > button:hover {
+    background-color: #120809;
+    border: 2px solid var(--netflix-red);
+    transform: translateY(-1px);
+}
+
+
+.body {
+    width: 100%;
+    padding: 100px 40px 50px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+
+.card1 {
+    position: relative;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--netflix-dark-gray);
+    transition: all var(--transition-speed);
+    box-shadow: var(--card-shadow);
+    height: 450px;
+    cursor: pointer;
+}
+
+.card1:hover {
+    transform: scale(1.05);
+    z-index: 10;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.5);
+}
+
+
+.card1::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0) 50%);
+    opacity: 0;
+    transition: opacity var(--transition-speed);
+    z-index: 1;
+}
+
+.card1:hover::before {
+    opacity: 1;
+}
+
+.card1 > .img {
+    width: 100%;
+    height: 60%;
+    position: relative;
+    overflow: hidden;
+}
+
+.card1 > .img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-speed);
+}
+
+.card1:hover > .img > img {
+    transform: scale(1.1);
+}
+
+.card1 > span {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+    transform: translateX(-100%);
+    animation: loading 1.5s infinite;
+    z-index: 10;
+}
+
+@keyframes loading {
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.card1 > .title {
+    padding: 15px;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: white;
+    height: auto;
+    transition: color var(--transition-speed);
+    position: relative;
+    z-index: 2;
+}
+
+.card1:hover > .title {
+    color: var(--netflix-red);
+}
+
+.card1 > .author {
+    padding: 0 15px;
+    font-size: 0.9rem;
+    color: var(--netflix-gray);
+    height: auto;
+    position: relative;
+    z-index: 2;
+    transition: color var(--transition-speed);
+}
+
+.card1:hover > .author {
+    color: var(--netflix-light);
+}
+
+.card1 > .content {
+    padding: 0 15px 15px;
+    font-size: 0.95rem;
+    height: auto;
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    color: var(--netflix-gray);
+    transition: color var(--transition-speed);
+}
+
+.card1:hover > .content {
+    color: var(--netflix-light);
+}
+
+.card1 > .desc {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 15px;
+    background-color: rgba(20, 20, 20, 0.9);
+    transform: translateY(100%);
+    transition: transform var(--transition-speed);
+    z-index: 3;
+}
+
+.card1:hover > .desc {
+    transform: translateY(0);
+}
+
+/* media quary  */
+
+@media (max-width: 1024px) {
+    .body {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+    
+    .header > .search {
+        width: 40%;
+    }
+}
+
+@media (max-width: 768px) {
+    .header {
+        padding: 0 20px;
+    }
+    
+    .header > .logo {
+        font-size: 1.5rem;
+    }
+    
+    .header > .search {
+        width: 50%;
+    }
+    
+    .body {
+        padding: 80px 20px 40px;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .card1 {
+        height: 400px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        flex-direction: column;
+        height: auto;
+        padding: 15px;
+    }
+    
+    .header > .logo {
+        margin-bottom: 15px;
+    }
+    
+    .header > .search {
+        width: 100%;
+        max-width: none;
+    }
+    
+    .body {
+        padding: 120px 15px 30px;
+        grid-template-columns: 1fr;
+    }
+    
+    .card1 {
+        height: 350px;
+    }
+    
+    .card1 > .title {
+        font-size: 1.3rem;
+    }
+}
+
