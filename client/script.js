@@ -1,6 +1,5 @@
 
 
-
 // get Element 
 let searchInput = document.getElementById("searchInput");
 let searchBtn = document.getElementById("searchBtn");
@@ -10,7 +9,7 @@ let card = document.querySelectorAll(".card1");
 
 function loadNews(query = "Tamil Nadu") {
   if(load) load.innerText = "Loading news...";
-  fetch(`http://localhost:5000/news?q=${query}`)
+  fetch(`/news?q=${query}`)
     .then((res) => res.json())
     .then((data) => {
       const AllData = data.articles;
